@@ -2,14 +2,22 @@
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
-import {Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next'
+import {Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, Users } from 'lucide-vue-next'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { Icon } from '@iconify/vue'
+import { useColorMode } from '@vueuse/core'
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: Home },
   { label: 'Products', href: '/', icon: Package },
   { label: 'Orders', href: '/', icon: LineChart },
   { label: 'Events', href: '/', icon: Bell },
+  { label: 'Users', href: '/dashboard/users', icon: Users },
 ]
+
+
+// Pass { disableTransition: false } to enable transitions
+const mode = useColorMode()
 </script>
 <template>
     <header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -78,6 +86,26 @@ const navItems = [
             </div>
           </form>
         </div>
+        <DropdownMenu>
+    <DropdownMenuTrigger as-child>
+      <Button variant="outline">
+        <Icon icon="radix-icons:moon" class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Icon icon="radix-icons:sun" class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <span class="sr-only">Toggle theme</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuItem @click="mode = 'light'">
+        Light
+      </DropdownMenuItem>
+      <DropdownMenuItem @click="mode = 'dark'">
+        Dark
+      </DropdownMenuItem>
+      <DropdownMenuItem @click="mode = 'auto'">
+        System
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger as-child>
             <Button variant="secondary" size="icon" class="rounded-full">

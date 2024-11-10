@@ -18,12 +18,13 @@
           :key="index"
           :to="item.href"
           class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          :class="{ 'shadow-md bg-muted group text-slate-950': $route.path === item.href }"
+          :class="{ 'shadow-md bg-muted group text-slate-950 dark:text-slate-100 group': $route.path === item.href }"
         >
           <component :is="item.icon" class="h-4 w-4" />
           {{ item.label }}
           <Badge
             class="ml-auto flex h-6 w-6 shrink-0 items-center bg-slate-900 text-slate-50 justify-center rounded-full"
+            :class="{ 'bg-slate-900 text-slate-50 dark:text-slate-900 dark:bg-slate-100': $route.path === item.href }"
           >
             6
           </Badge>
@@ -54,6 +55,7 @@ const navItems = [
   { label: 'Products', href: '/dashboard/product', icon: Package },
   { label: 'Orders', href: '/', icon: LineChart },
   { label: 'Events', href: '/', icon: Bell },
+  { label: 'Users', href: '/dashboard/users', icon: Users },
 ]
 </script>
 <style lang=""></style>
