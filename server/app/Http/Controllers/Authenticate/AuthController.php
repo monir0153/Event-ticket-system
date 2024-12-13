@@ -15,9 +15,8 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
-        $token = Auth::login($user);
-        return Response::success(['token' => $token, 'user' => $user], 'User registered successfully');
+        User::create($request->validated());
+        return Response::success(message: 'User registered successfully');
     }
     public function login(LoginRequest $request)
     {
@@ -25,7 +24,7 @@ class AuthController extends Controller
         if (! $token) {
             return Response::unauthorized("Invalid credentials");
         }
-        return Response::success(['token' => $token, 'user' => $request->user()]);
+        return Response::success(['token' => $token, 'token_type' => "bearer", 'user' => $request->user()]);
     }
 
     public function logout()
