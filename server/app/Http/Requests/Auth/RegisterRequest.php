@@ -28,7 +28,11 @@ class RegisterRequest extends FormRequest
             'phone' => ['nullable', 'unique:users,phone'],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'country' => ['required'],
+            'district' => ['required'],
+            'thana' => ['required'],
+            'word_no' => ['nullable'],
+            'union_number' => ['nullable', 'required_if:word_no,null'],
         ];
     }
     public function failedValidation(Validation $validator)
