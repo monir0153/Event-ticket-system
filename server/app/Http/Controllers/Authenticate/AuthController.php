@@ -18,7 +18,6 @@ class AuthController extends Controller
         DB::transaction(function () use ($request) {
             $user = User::create($request->validated());
             $user->address()->create($request->validated() + ['user_id' => $user->id]);
-
             // if ($request->has('image_url')) {
             //     $user->image()->create(['url' => $request->input('image_url')]);
             // }
