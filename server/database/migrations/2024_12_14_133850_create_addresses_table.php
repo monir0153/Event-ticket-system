@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('country');
+            $table->string('division');
             $table->string('district');
-            $table->string('thana');
-            $table->string('word_no')->nullable();
-            $table->string('union_number')->nullable();
+            $table->string('upazilla');
+            $table->string('union');
 
             $table->timestamps();
         });

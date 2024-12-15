@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^11.2.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.454.0",
@@ -22,6 +22,7 @@
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.5.12",
+    "vue-axios": "^3.5.2",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {

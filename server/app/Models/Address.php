@@ -9,11 +9,10 @@ class Address extends Model
 {
     protected $fillable = [
         'user_id',
-        'country',
+        'division',
         'district',
-        'thana',
-        'word_no',
-        'union_number'
+        'upazilla',
+        'union'
     ];
 
     public function user(): BelongsTo
