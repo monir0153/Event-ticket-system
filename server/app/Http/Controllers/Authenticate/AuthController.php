@@ -9,13 +9,19 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        User::create($request->validated());
+        DB::transaction(function () use ($request) {
+            $user = User::create($request->validated());
+            $user->address()->create($request->validated() + ['user_id' => $user->id]);
+            // if ($request->has('image_url')) {
+            //     $user->image()->create(['url' => $request->input('image_url')]);
+            // }
+        });
         return Response::success(message: 'User registered successfully');
     }
     public function login(LoginRequest $request)
