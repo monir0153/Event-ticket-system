@@ -13,14 +13,3 @@ Route::middleware('auth:api')->controller(AuthController::class)->group(function
     Route::get('refresh', 'refresh');
 });
 
-Route::get('mail', function () {
-    try {
-        Mail::raw('Hello vai', function ($message) {
-            $message->to('test@example.com')
-                ->subject('Test Email');
-        });
-        return 'Email sent successfully';
-    } catch (\Exception $e) {
-        return 'Error: ' . $e->getMessage();
-    }
-});
