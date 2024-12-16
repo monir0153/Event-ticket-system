@@ -15,4 +15,5 @@ Route::middleware('auth:api')->controller(AuthController::class)->group(function
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function() {
     Route::get('/roleWisePermission', [RoleController::class, 'index'])->name('roleWisePermission.index');
+    Route::get('/permissions', [RoleController::class, 'allPermission'])->name('permissions.allPermission');
 });
