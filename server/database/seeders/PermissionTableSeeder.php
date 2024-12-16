@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -15,34 +14,37 @@ class PermissionTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $adminRole = Role::create(['name' => 'Admin']);
 
-        
-
-        {
-            $permissions = [
-               'role-list',
-               'role-create',
-               'role-edit',
-               'role-delete',
-               'product-list',
-               'product-create',
-               'product-edit',
-               'product-delete'
-            ];
+        $permissions =[
+            ['name'=>'user list'],
+            ['name'=>'create user'],
+            ['name'=>'edit user'],
+            ['name'=>'delete user'], 
+            ['name'=>'role list'],
+            ['name'=>'create role'],
+            ['name'=>'edit role'],
+            ['name'=>'delete role'],                 
+            ['name'=>'permission list'],        
             
-            foreach ($permissions as $permission) {
-                 Permission::create(['name' => $permission]);
-            }
-        }
-        $adminRole = Role::create(['name' => 'admin']);
-         
-        $permissions = Permission::pluck('id','id')->all();
-       
-        $adminRole->syncPermissions($permissions);
 
+        ];
+         
+         foreach($permissions as $item){
+            Permission::create($item);
+        }
+
+         
+        // $permissions = Permission::all();
+       
+        $permissions= Permission::all();
+        $adminRole->syncPermissions($permissions);
+         
         $user = User::first();
         if ($user) {
             $user->assignRole($adminRole);
         }
+
+
     }
 }
