@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, watch } from 'vue';
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,49 +17,45 @@ import { useColorMode } from '@vueuse/core'
 useColorMode()
 import axios from 'axios';
 
-interface Division { id: number; name: string; }
-interface District { id: number; name: string; divisionId: number; }
-interface Upazilla { id: number; name: string; districtId: number; }
-interface Union { id: number; name: string; upazillaId: number; }
 
-const divisions = ref<Division[] | null>(null);
-const districts = ref<District[]>([]);
-const upazillas = ref<Upazilla[]>([]);
-const unions = ref<Union[]>([]);
+const divisions = ref(null);
+const districts = ref([]);
+const upazillas = ref([]);
+const unions = ref([]);
 
-const selectedDivision = ref<string | undefined>(undefined);
-const selectedDistrict = ref<string | undefined>(undefined);
-const selectedUpazilla = ref<string | undefined>(undefined);
+const selectedDivision = ref(undefined);
+const selectedDistrict = ref(undefined);
+const selectedUpazilla = ref(undefined);
 
 const fetchDivisions = async () => {
   try {
     const response = await axios.get('https://bdapi.vercel.app/api/v.1/division');
-    divisions.value = response.data.data as Division[];
+    divisions.value = response.data.data;
   } catch (error) {
     console.error('Error fetching divisions:', error);
   }
 };
-const fetchDistricts = async (divisionId: string) => {
+const fetchDistricts = async (divisionId) => {
   try {
     const response = await axios.get(`https://bdapi.vercel.app/api/v.1/district/${divisionId}`);
-    districts.value = response.data.data as District[];
+    districts.value = response.data.data;
   } catch (error) {
     console.error('Error fetching districts:', error);
   }
 };
-const fetchUpazillas = async (districtId: string) => {
+const fetchUpazillas = async (districtId) => {
   try {
     const response = await axios.get(`https://bdapi.vercel.app/api/v.1/upazilla/${districtId}`);
-    upazillas.value = response.data.data as Upazilla[];
+    upazillas.value = response.data.data;
   } catch (error) {
     console.error('Error fetching upazillas:', error);
 
   }
 };
-const fetchUnions = async (upazillaId: string) => {
+const fetchUnions = async (upazillaId) => {
   try {
     const response = await axios.get(`https://bdapi.vercel.app/api/v.1/union/${upazillaId}`);
-    unions.value = response.data.data as Union[];
+    unions.value = response.data.data;
   } catch (error) {
     console.error('Error fetching unions:', error);
   }
@@ -136,7 +132,7 @@ onMounted(() => { fetchDivisions(); });
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Division</SelectLabel>
-                  <SelectItem v-for="division in divisions" :key="division.id" :value="division.id.toString()"> {{
+                  <SelectItem v-for="division in divisions" :key="division.id" :value="division.id"> {{
                     division.name }} </SelectItem>
                 </SelectGroup>
               </SelectContent>
@@ -147,7 +143,7 @@ onMounted(() => { fetchDivisions(); });
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>District</SelectLabel>
-                  <SelectItem v-for="district in districts" :key="district.id" :value="district.id.toString()"> {{
+                  <SelectItem v-for="district in districts" :key="district.id" :value="district.id"> {{
                     district.name }} </SelectItem>
                 </SelectGroup>
               </SelectContent>
@@ -159,7 +155,7 @@ onMounted(() => { fetchDivisions(); });
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Upazilla</SelectLabel>
-                  <SelectItem v-for="upazilla in upazillas" :key="upazilla.id" :value="upazilla.id.toString()"> {{
+                  <SelectItem v-for="upazilla in upazillas" :key="upazilla.id" :value="upazilla.id"> {{
                     upazilla.name }} </SelectItem>
                 </SelectGroup>
               </SelectContent>
@@ -170,7 +166,7 @@ onMounted(() => { fetchDivisions(); });
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Union</SelectLabel>
-                  <SelectItem v-for="union in unions" :key="union.id" :value="union.id.toString()"> {{ union.name }}
+                  <SelectItem v-for="union in unions" :key="union.id" :value="union.id"> {{ union.name }}
                   </SelectItem>
                 </SelectGroup>
               </SelectContent>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'

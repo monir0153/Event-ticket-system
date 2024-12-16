@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
 </script>
