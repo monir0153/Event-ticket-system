@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Authenticate\AuthController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->controller(AuthController::class)->group(function () {
@@ -13,3 +13,6 @@ Route::middleware('auth:api')->controller(AuthController::class)->group(function
     Route::get('refresh', 'refresh');
 });
 
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function() {
+    Route::get('/roleWisePermission', [RoleController::class, 'index'])->name('roleWisePermission.index');
+});
